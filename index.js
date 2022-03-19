@@ -26,7 +26,9 @@ let notes = [
 
 
 app.get('/',(req,res)=>{
-    res.send('<h1>Hello World</h1>')
+    res.statusCode = 302;
+  res.setHeader("Location", "http://localhost:3000");
+  res.end();
 
 
 })
@@ -64,14 +66,14 @@ const generateId=()=>
 }
 app.post('/api/notes/',(req,res)=>{
     const body=req.body
-    console.log("Is there any request")
+   
     if(!body.content)
     {
-        console.log('gadbad')
+       
         const x=res.status(400).end('Content Missing')
         return x
     }
-    console.log('gadbad nhi pkdi')
+   
     const noteObj={
         "id":generateId(),
         "content":body.content,
@@ -84,10 +86,8 @@ app.post('/api/notes/',(req,res)=>{
    // res.json(notes)
 })
 
-const PORT = process.env.PORT || 3001
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
-})
+const PORT =  3001
+
 
 app.listen(PORT,()=>{
     console.log(`Greatest website is running on  port ${PORT}`)
